@@ -21,8 +21,6 @@ PACKAGES="$PACKAGES luci-i18n-argon-config-zh-cn"
 # 你要的插件（无 PassWall）
 PACKAGES="$PACKAGES luci-app-openclash"        # 科学上网
 PACKAGES="$PACKAGES luci-app-diskman"          # 磁盘管理
-PACKAGES="$PACKAGES luci-app-ttyd"             # 网页终端
-PACKAGES="$PACKAGES luci-app-netdata"          # 系统监控
 
 # 构建：x86_64 + 1024MB 根分区
 make image \
