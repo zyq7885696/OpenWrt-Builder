@@ -25,6 +25,6 @@ PACKAGES="$PACKAGES luci-app-netdata"          # 系统监控
 
 # 构建：x86_64 + 1024MB 根分区
 make image \
-  PROFILE="x86-64" \
+  PROFILE="generic" \
   PACKAGES="$PACKAGES" \
   ROOTFS_PARTSIZE="1024"
