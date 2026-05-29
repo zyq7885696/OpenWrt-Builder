@@ -19,12 +19,9 @@ PACKAGES="$PACKAGES luci-i18n-argon-config-zh-cn"
 
 # 你要的插件（无 PassWall）
 PACKAGES="$PACKAGES luci-app-openclash"        # 科学上网
-PACKAGES="$PACKAGES luci-app-mosdns v2dat"     # DNS 分流
 PACKAGES="$PACKAGES luci-app-diskman"          # 磁盘管理
 PACKAGES="$PACKAGES luci-app-ttyd"             # 网页终端
 PACKAGES="$PACKAGES luci-app-netdata"          # 系统监控
-PACKAGES="$PACKAGES luci-app-mwan3 luci-i18n-mwan3-zh-cn"  # 多线叠加
-PACKAGES="$PACKAGES luci-app-turboacc"         # 网络加速
 
 # 构建：x86_64 + 1024MB 根分区
 make image \
