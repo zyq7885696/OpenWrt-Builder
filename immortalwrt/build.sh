@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# 解决挂载目录权限问题，直接在构建脚本里创建目标目录
+mkdir -p /home/build/immortalwrt/bin/targets
+chmod 777 /home/build/immortalwrt/bin
+
 PACKAGES=""
 
 # 基础工具
