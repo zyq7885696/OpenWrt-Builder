@@ -27,4 +27,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ImmortalWrt-固件
-          path: immortalwrt/bin/*.img
+          path: bin/targets/x86/generic/*.img.gz
