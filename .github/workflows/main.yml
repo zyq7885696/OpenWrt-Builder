@@ -8,17 +8,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: 拉取代码
         uses: actions/checkout@v4
 
-      - name: Run build script
+      - name: 构建固件
         run: |
-          cd immortalwrt
+          cd ./immortalwrt
           chmod +x build.sh docker-build.sh
           ./docker-build.sh
 
-      - name: Upload artifacts
+      - name: 上传固件
         uses: actions/upload-artifact@v4
         with:
-          name: immortalwrt-firmware
+          name: ImmortalWrt-固件
           path: immortalwrt/bin/*.img
