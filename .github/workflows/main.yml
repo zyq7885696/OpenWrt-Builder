@@ -11,8 +11,14 @@ jobs:
       - name: 拉取代码
         uses: actions/checkout@v4
 
-      - name: 构建固件
+      - name: 列出当前目录结构（方便排错）
         run: |
+          ls -la
+          ls -la ./immortalwrt/
+
+      - name: 构建固件（带错误输出）
+        run: |
+          set -e
           cd ./immortalwrt
           chmod +x build.sh docker-build.sh
           ./docker-build.sh
