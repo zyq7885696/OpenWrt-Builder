@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# 1. 系统中文
+uci set luci.main.lang='zh-cn'
+uci commit luci
+
+# 2. 默认 Argon 主题
+uci set luci.main.mediaurlbase='/luci-static/argon'
+uci commit luci
+
+# 3. root 密码：123456
+echo -e "123456\n123456" | passwd root
+
+# 4. 旁路由 IP：192.168.2.1/24，清空网关/DNS
+uci set network.lan.ipaddr='192.168.2.1'
+uci set network.lan.netmask='255.255.255.0'
+uci delete network.lan.gateway
+uci delete network.lan.dns
+uci commit network
+
+# 5. 关闭 DHCP 服务器，推送网关+DNS
+uci set dhcp.lan.ignore='1'
+uci set dhcp.lan.dhcp_option='3,192.168.2.1 6,192.168.2.1'
+uci commit dhcp
+
+# 6. OpenClash：关闭开机自启，保留 TUN
+uci set openclash.config.enable='0'
+uci set openclash.config.tun_enable='1'
+uci commit openclash
+
+# 7. 防火墙放行
+uci set firewall.@zone[1].input='ACCEPT'
+uci set firewall.@zone[1].forward='ACCEPT'
+uci commit firewall
+
+# 8. 开启 BBR
+cat > /etc/sysctl.d/99-bbr.conf <<EOF
+net.core.default_qdisc=fq
+net.ipv4.tcp_congestion_control=bbr
+EOF
+sysctl -p /etc/sysctl.d/99-bbr.conf
+
+# 9. 重启服务
+/etc/init.d/network restart
+/etc/init.d/dnsmasq restart
+/etc/init.d/firewall restart
